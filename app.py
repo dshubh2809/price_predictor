@@ -5,28 +5,28 @@ from tensorflow.keras.models import load_model
 
 st.title("Cryptocurrency Price Predictor")
 
-# Step 1: Fetch historical data
+
 symbol = st.text_input("Enter trading pair (e.g., BTC/USDT):", "BTC/USDT")
 if st.button("Fetch Data"):
     df = fetch_historical_data(symbol)
     st.write("Historical Data:")
     st.write(df)
 
-    # Step 2: Preprocess data
+    
     df = preprocess_data(df)
 
-    # Step 3: Train model
+    
     if st.button("Train Model"):
         model = train_model(df)
         st.success("Model trained and saved!")
 
-        # Step 4: Backtest model
+
         if st.button("Backtest"):
             accuracy, df_with_predictions = backtest(model, df)
             st.write(f"Backtesting Accuracy: {accuracy * 100:.2f}%")
             st.write(df_with_predictions)
 
-# Load and predict with existing model
+
 st.subheader("Predict Future Prices")
 uploaded_model = st.file_uploader("Upload a trained model", type=["h5"])
 if uploaded_model:
